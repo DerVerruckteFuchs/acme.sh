@@ -127,7 +127,7 @@ dns_1984hosting_rm() {
 
 ####################  Private functions below ##################################
 
-# usage: _1984hosting_login username password
+# usage: _1984hosting_login username password apikey
 # returns 0 success
 _1984hosting_login() {
   if ! _check_credentials; then return 1; fi
@@ -140,6 +140,7 @@ _1984hosting_login() {
   _debug "Login to 1984Hosting as user $One984HOSTING_Username"
   username=$(printf '%s' "$One984HOSTING_Username" | _url_encode)
   password=$(printf '%s' "$One984HOSTING_Password" | _url_encode)
+  apikey=$(printf '%s' "$One984HOSTING_FreeDNS_APIKey" | _url_encode)
   url="https://management.1984hosting.com/accounts/checkuserauth/"
 
   response="$(_post "username=$username&password=$password&otpkey=" "$url")"
