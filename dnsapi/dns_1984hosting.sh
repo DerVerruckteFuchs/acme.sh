@@ -46,7 +46,7 @@ dns_1984hosting_add() {
   apikey="$(printf '%s' "$One984HOSTING_FreeDNS_APIKey" | _url_encode)"
   url="https://api.1984.is/1.0/freedns/letsencrypt/"
 
-  postdata = "apikey=$apikey&domain=$_domain&challenge=$value"
+  postdata="apikey=$apikey&domain=$_domain&challenge=$value"
   _debug2 postdata "$postdata"
 
   _authpost "$postdata" "$url"
