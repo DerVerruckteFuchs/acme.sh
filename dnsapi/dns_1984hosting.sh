@@ -14,6 +14,7 @@
 #
 #  One984HOSTING_Username=username
 #  One984HOSTING_Password=password
+#  One984HOSTING_FreeDNS_APIKey=freedns_apikey
 #
 # sessionid cookie is saved in ~/.acme.sh/account.conf
 # username/password need to be set only when changed.
@@ -42,14 +43,10 @@ dns_1984hosting_add() {
 
   _debug "Add TXT record $fulldomain with value '$txtvalue'"
   value="$(printf '%s' "$txtvalue" | _url_encode)"
-  url="https://management.1984hosting.com/domains/entry/"
+  apikey="$(printf '%s' "$One984HOSTING_FreeDNS_APIKey" | _url_encode)"
+  url="https://api.1984.is/1.0/freedns/letsencrypt/"
 
-  postdata="entry=new"
-  postdata="$postdata&type=TXT"
-  postdata="$postdata&ttl=3600"
-  postdata="$postdata&zone=$_domain"
-  postdata="$postdata&host=$_sub_domain"
-  postdata="$postdata&rdata=%22$value%22"
+  postdata = "apikey=$apikey&domain=$_domain&challenge=$value"
   _debug2 postdata "$postdata"
 
   _authpost "$postdata" "$url"
