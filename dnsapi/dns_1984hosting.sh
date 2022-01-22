@@ -14,6 +14,7 @@
 #
 #  One984HOSTING_Username=username
 #  One984HOSTING_Password=password
+#  One984HOSTING_TOTP_Secret=TOTP secret to generate OTP
 #
 # sessionid cookie is saved in ~/.acme.sh/account.conf
 # username/password need to be set only when changed.
@@ -140,7 +141,15 @@ _1984hosting_login() {
   password=$(printf '%s' "$One984HOSTING_Password" | _url_encode)
   url="https://management.1984hosting.com/accounts/checkuserauth/"
 
-  response="$(_post "username=$username&password=$password&otpkey=" $url)"
+  otpkey=""
+  if [ -n "$One984HOSTING_TOTP_Secret" ]; then
+	  _debug "Generating OTP from TOTP secret"
+	  otpkey="$(oathtool --base32 --totp "${One984HOSTING_TOTP_Secret}" 2>/dev/null)"
+	  otpkey=$(printf '%s' "$otpkey" | _url_encode)
+	  _debug2 otp "$otpkey"
+  fi
+
+  response="$(_post "username=$username&password=$password&otpkey=$otpkey" $url)"
   response="$(echo "$response" | _normalizeJson)"
   _debug2 response "$response"
 
