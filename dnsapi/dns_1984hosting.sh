@@ -143,10 +143,10 @@ _1984hosting_login() {
 
   otpkey=""
   if [ -n "$One984HOSTING_TOTP_Secret" ]; then
-	  _debug "Generating OTP from TOTP secret"
-	  otpkey="$(oathtool --base32 --totp "${One984HOSTING_TOTP_Secret}" 2>/dev/null)"
-	  otpkey=$(printf '%s' "$otpkey" | _url_encode)
-	  _debug2 otp "$otpkey"
+    _debug "Generating OTP from TOTP secret"
+    otpkey="$(oathtool --base32 --totp "${One984HOSTING_TOTP_Secret}" 2>/dev/null)"
+    otpkey=$(printf '%s' "$otpkey" | _url_encode)
+    _debug2 otp "$otpkey"
   fi
 
   response="$(_post "username=$username&password=$password&otpkey=$otpkey" $url)"
