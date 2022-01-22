@@ -96,7 +96,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install tools
-      run:  brew install socat
+      run:  brew install socat oath-toolkit
     - name: Clone acmetest
       run: cd .. && git clone https://github.com/acmesh-official/acmetest.git  && cp -r acme.sh acmetest/
     - name: Run acmetest
@@ -191,7 +191,7 @@ jobs:
     - uses: vmactions/freebsd-vm@v0.1.4
       with:
         envs: 'TEST_DNS TestingDomain TEST_DNS_NO_WILDCARD TEST_DNS_NO_SUBDOMAIN TEST_DNS_SLEEP CASE TEST_LOCAL DEBUG ${{ secrets.TokenName1}} ${{ secrets.TokenName2}} ${{ secrets.TokenName3}} ${{ secrets.TokenName4}} ${{ secrets.TokenName5}}'
-        prepare: pkg install -y socat curl
+        prepare: pkg install -y socat curl oath-toolkit
         usesh: true
         run: |
           if [ "${{ secrets.TokenName1}}" ] ; then

@@ -54,7 +54,7 @@ jobs:
         envs: 'TEST_LOCAL TestingDomain TEST_ACME_Server CA_ECDSA CA CA_EMAIL TEST_PREFERRED_CHAIN'
         nat: |
           "8080": "80"
-        prepare: pkg install -y socat curl
+        prepare: pkg install -y socat curl oath-toolkit
         usesh: true
         run: |
           cd ../acmetest \

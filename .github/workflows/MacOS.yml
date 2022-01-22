@@ -41,7 +41,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install tools
-      run:  brew install socat
+      run:  brew install socat oath-toolkit
     - name: Clone acmetest
       run: |
           cd .. \
