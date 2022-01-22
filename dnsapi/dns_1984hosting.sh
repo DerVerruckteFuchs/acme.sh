@@ -169,6 +169,7 @@ _check_credentials() {
   if [ -z "$One984HOSTING_Username" ] || [ -z "$One984HOSTING_Password" ]; then
     One984HOSTING_Username=""
     One984HOSTING_Password=""
+    One984HOSTING_TOTP_Secret=""
     _err "You haven't specified 1984Hosting username or password yet."
     _err "Please export as One984HOSTING_Username / One984HOSTING_Password and try again."
     return 1
